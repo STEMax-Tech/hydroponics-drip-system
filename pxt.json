@@ -1,23 +1,25 @@
 {
-    "name": "hydroponics-drip-system",
-    "version": "0.0.0",
+    "name": "soil-moisture-sensing-system",
+    "version": "0.0.2",
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "eprom-microbit": "github:zobclub/eprom-microbit#3424f25b4ce6257e2f43f8cff2fb3d3226cd37a2",
+        "MakerEdu_Hardware": "github:makerlabvn/MakerEdu_Hardware#v0.0.2"
     },
     "files": [
         "README.md",
         "main.blocks",
-        "main.ts"
+        "main.ts",
+        "tutorial-info-cache.json"
     ],
     "testFiles": [
         "test.ts"
     ],
     "public": true,
     "targetVersions": {
-        "target": "7.0.51",
+        "target": "6.0.28",
         "targetId": "microbit"
     },
     "supportedTargets": [
