@@ -24,6 +24,7 @@ To edit this repository in MakeCode.
 <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
 
 ## Connection Diagram
-Push button A is used to adjust the moisture threshold parameter (setSoilMoisture) form 0 - 100% with step = 1
-Push button B is used to adjust the motor speed parameter (setMotorSpeed) from 5 - 100% with step = 5 
+* Push button A is used to adjust the moisture threshold parameter (setSoilMoisture) form 0 - 100% with step = 1
+* Push button B is used to adjust the motor speed parameter (setMotorSpeed) from 5 - 100% with step = 5 
+
 <img src="https://raw.githubusercontent.com/STEMax-Tech/soil-moisture-sensing-system/d4686748f3a612b9fa3e55220b0964cd0986d7d9/Hardware-Soil%20Moisture%20Control%20Pump.drawio.svg">
