@@ -1,6 +1,7 @@
-let setSoilMoisture = 0
 let soilMoisture = 0
-let analogValue = EEPROM.readw(0)
+let analogValue = 0
+let setSoilMoisture = 20
+let setMotorSpeed = 50
 basic.forever(function () {
     analogValue = 0
     for (let index = 0; index <= 9; index++) {
@@ -17,51 +18,33 @@ basic.forever(function () {
 })
 basic.forever(function () {
     serial.writeLine("Soil Moisture: " + soilMoisture + " %")
-    serial.writeLine("Set Soil Moisture: " + setSoilMoisture)
+    serial.writeLine("Set Soil Moisture: " + setSoilMoisture + " %")
+    serial.writeLine("Set Motor Speed: " + setMotorSpeed + " %")
     lcd.displayText("Moisture:" + soilMoisture + "%    ", 1, 1)
-    lcd.displayText("Set Moisture:" + setSoilMoisture + "    ", 1, 2)
+    lcd.displayText("SM:" + setSoilMoisture + "  ", 1, 2)
+    lcd.displayText("SP:" + setMotorSpeed + "  ", 9, 2)
     if (soilMoisture > setSoilMoisture) {
         lcd.displayText(" ", 16, 1)
         basic.showIcon(IconNames.Happy)
     } else {
         lcd.displayText(lcd.displaySymbol(lcd.Symbols.sym10), 16, 1)
         basic.showIcon(IconNames.Sad)
-        music.play(music.tonePlayable(880, music.beat(BeatFraction.Eighth)), music.PlaybackMode.UntilDone)
     }
     basic.pause(200)
 })
 basic.forever(function () {
-    if (input.buttonIsPressed(Button.A)) {
-        setSoilMoisture += -1
-        if (setSoilMoisture < 0) {
-            setSoilMoisture = 100
+    if (input.buttonIsPressed(Button.B)) {
+        basic.pause(200)
+        setMotorSpeed += 5
+        if (setMotorSpeed > 100) {
+            setMotorSpeed = 5
         }
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . # # # .
-            . . . . .
-            . . . . .
-            `)
-    } else if (input.buttonIsPressed(Button.B)) {
+    } else if (input.buttonIsPressed(Button.A)) {
+        basic.pause(200)
         setSoilMoisture += 1
         if (setSoilMoisture > 100) {
             setSoilMoisture = 0
         }
-        basic.showLeds(`
-            . . . . .
-            . . # . .
-            . # # # .
-            . . # . .
-            . . . . .
-            `)
-    }
-    if (input.logoIsPressed()) {
-        while (input.logoIsPressed()) {
-            basic.showIcon(IconNames.Yes)
-        }
-        EEPROM.writew(0, setSoilMoisture)
-        music.play(music.tonePlayable(880, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
     }
 })
 basic.forever(function () {
@@ -69,7 +52,7 @@ basic.forever(function () {
         l9110.pauseMotor(l9110.Motor.MotorA)
         l9110.pauseMotor(l9110.Motor.MotorB)
     } else {
-        l9110.controlMotor(l9110.Motor.MotorA, l9110.Rotate.Forward, 100)
-        l9110.controlMotor(l9110.Motor.MotorB, l9110.Rotate.Forward, 100)
+        l9110.controlMotor(l9110.Motor.MotorA, l9110.Rotate.Forward, setMotorSpeed)
+        l9110.controlMotor(l9110.Motor.MotorB, l9110.Rotate.Forward, setMotorSpeed)
     }
 })
