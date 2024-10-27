@@ -1,15 +1,9 @@
 let soilMoisture = 0
-let analogValue = 0
 let setSoilMoisture = 20
 let setMotorSpeed = 50
 basic.forever(function () {
-    analogValue = 0
-    for (let index = 0; index <= 9; index++) {
-        analogValue += pins.analogReadPin(AnalogPin.P0)
-    }
-    analogValue = analogValue / 10
     soilMoisture = Math.round(pins.map(
-    analogValue,
+    pins.analogReadPin(AnalogPin.P0),
     0,
     1023,
     100,
