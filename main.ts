@@ -11,9 +11,9 @@ basic.forever(function () {
     ))
 })
 basic.forever(function () {
-    lcd.displayText("Moisture:" + soilMoisture + "%    ", 1, 1)
-    lcd.displayText("SM:" + setSoilMoisture + "  ", 1, 2)
-    lcd.displayText("SP:" + setMotorSpeed + "  ", 9, 2)
+    serial.writeLine("Soil Moisture: " + soilMoisture + " %")
+    serial.writeLine("Set Soil Moisture: " + setSoilMoisture + " %")
+    serial.writeLine("Set Motor Speed: " + setMotorSpeed + " %")
     if (soilMoisture > setSoilMoisture) {
         basic.showIcon(IconNames.Happy)
     } else {
